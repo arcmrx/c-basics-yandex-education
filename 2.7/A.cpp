@@ -22,21 +22,3 @@ std::pair<size_t, size_t> MatrixArgMax(const std::vector<std::vector<int>> &matr
     }
     return std::make_pair(maxR, maxC);
 }
-
-// int main()
-// {
-//     int countR, countC;
-//     std::cin >> countR >> countC;
-//     std::vector<std::vector<int>> matrix(countR, std::vector<int>(countC));
-//     for (int i = 0; i != countR; ++i)
-//     {
-//         for (int j = 0; j != countC; ++j)
-//         {
-//             std::cin >> matrix[i][j];
-//         }
-//     }
-
-//     std::cout << MatrixArgMax(matrix).first << " " << MatrixArgMax(matrix).second;
-
-//     return 0;
-// }
