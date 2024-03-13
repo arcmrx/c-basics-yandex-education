@@ -1,1 +1,1 @@
-# Решения хендбука ["Основы C++"](https://education.yandex.ru/handbook/cpp)
+# 📝 Решения хендбука ["Основы C++"](https://education.yandex.ru/handbook/cpp)
