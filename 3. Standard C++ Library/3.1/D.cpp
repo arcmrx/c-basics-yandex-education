@@ -1,42 +1,68 @@
-#include <deque>
 #include <iostream>
+#include <list>
 #include <string>
+#include <utility>
 
-void TextEditor()
+int main()
 {
-    std::deque<int> train;
-    std::string comm;
-    int numWag;
-    size_t k;
-    while (std::cin >> comm)
+    std::list<std::string> file;
+
+    while (true)
     {
-        if (comm == "+left")
+        std::string line;
+        std::getline(std::cin, line);
+
+        if (line.empty())
         {
-            std::cin >> numWag;
-            train.push_front(numWag);
+            break;
         }
-        else if (comm == "+right")
+
+        file.push_back(line);
+    }
+
+    auto cursor = file.begin();
+    std::string buffer;
+
+    std::string command;
+    while (std::cin >> command)
+    {
+        if (command == "Up")
         {
-            std::cin >> numWag;
-            train.push_back(numWag);
+            if (cursor == file.begin())
+            {
+                continue;
+            }
+            --cursor;
         }
-        else if (comm == "-left")
+        else if (command == "Down")
         {
-            std::cin >> k;
-            k = std::min(k, train.size());
-            train.erase(train.begin(), train.begin() + k);
+            if (cursor == file.end())
+            {
+                continue;
+            }
+            ++cursor;
         }
-        else if (comm == "-right")
+        else if (command == "Ctrl+X")
         {
-            std::cin >> k;
-            k = std::min(k, train.size());
-            train.erase(train.end() - k, train.end());
+            if (cursor == file.end())
+            {
+                continue;
+            }
+            buffer = std::move(*cursor);
+            cursor = file.erase(cursor);
+        }
+        else if (command == "Ctrl+V")
+        {
+            if (buffer.empty())
+            {
+                continue;
+            }
+            file.insert(cursor, buffer);
         }
     }
 
-    for (const auto &numWag : train)
+    for (const auto &x : file)
     {
-        std::cout << numWag << " ";
+        std::cout << x << "\n";
     }
-    std::cout << "\n";
 }
